@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\HEAL.StringFormatter.Interfaces\bin\Debug\HEAL.StringFormatter.Interfaces.0.1.0-alpha.1.nupkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

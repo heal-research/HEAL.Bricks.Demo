@@ -16,4 +16,8 @@
     <PackageReference Include="HEAL.StringFormatter.Interfaces" Version="0.1.0-alpha.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
 </Project>
