@@ -1,14 +1,17 @@
-# Description
-HEAL.Bricks.Demo contains the StringFormatter application, which is a simple demo application to show how to use HEAL.Bricks.
+# HEAL.Bricks.Demo Manual
+The HEAL.Bricks.Demo repository contains the StringFormatter application, which is a simple demo application to show how to use HEAL.Bricks.
+
+## Introduction
+... work in progress ...
 
 
-# License
-HEAL.Bricks.Demo is [licensed](LICENSE.txt) under the MIT License.
+## License
+HEAL.Bricks is [licensed](../LICENSE.txt) under the MIT License.
 
 ```
 MIT License
 
-Copyright (c) 2020-present Heuristic and Evolutionary Algorithms Laboratory
+Copyright (c) 2019-present Heuristic and Evolutionary Algorithms Laboratory
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

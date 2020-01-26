@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>HEAL.StringFormatter</RootNamespace>
+    <Version>0.1.0-alpha.1</Version>
+    <Authors>SWa</Authors>
+    <Company>HEAL</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HEAL.Bricks" Version="0.1.0-alpha.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\HEAL.StringFormatter.Interfaces\bin\Debug\HEAL.StringFormatter.Interfaces.0.1.0-alpha.1.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HEAL.StringFormatter.BasicFormatters\bin\Debug\HEAL.StringFormatter.BasicFormatters.0.1.0-alpha.1.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HEAL.StringFormatter.ConsoleApp\bin\Debug\HEAL.StringFormatter.ConsoleApp.0.1.0-alpha.1.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

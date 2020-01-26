@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0-alpha.1</Version>
+    <Authors>SWa</Authors>
+    <Company>HEAL</Company>
+    <Product>HEAL.StringFormatter</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>HEALStringFormatterPlugin</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HEAL.Bricks" Version="0.1.0-alpha.6" />
+    <PackageReference Include="HEAL.StringFormatter.Interfaces" Version="0.1.0-alpha.1" />
+  </ItemGroup>
+
+</Project>
