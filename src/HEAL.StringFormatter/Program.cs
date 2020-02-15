@@ -177,9 +177,9 @@ namespace HEAL.StringFormatter {
       Console.WriteLine();
     }
     private static void LoadPlugins() {
-      Console.WriteLine("Loading assemblies ...");
-      NuGetAssemblyLoader.Load();
-      Console.WriteLine("... done");
+      Console.Write("Loading assemblies ... ");
+      pluginManager.LoadPackageAssemblies();
+      Console.WriteLine("done");
       Console.WriteLine();
     }
     private static void StartApplication() {
