@@ -184,7 +184,10 @@ namespace HEAL.StringFormatter {
     }
     private static void StartApplication() {
       Console.WriteLine("Applications:");
-      IApplication[] applications = typeDiscoverer.GetInstances<IApplication>().OrderBy(x => x.Name).ToArray();
+
+      DiscoverApplicationsRunner discoverApplicationsRunner = new DiscoverApplicationsRunner(pluginManager.Settings);
+      discoverApplicationsRunner.Run();
+      ApplicationInfo[] applications = discoverApplicationsRunner.ReceiveMessage<DiscoveredApplicationsMessage>().Data;
       for (int i = 0; i < applications.Length; i++) {
         Console.WriteLine($"[{i + 1}] {applications[i].Name}");
       }
@@ -193,7 +196,23 @@ namespace HEAL.StringFormatter {
       int applicationIndex = ReadActionIndex("Application", 0, applications.Length);
       Console.WriteLine();
       if (applicationIndex == 0) return;
-      else applications[applicationIndex - 1].Run(Array.Empty<ICommandLineArgument>());
+      else {
+        ApplicationRunner applicationRunner = new ApplicationRunner(pluginManager.Settings, applications[applicationIndex - 1]);
+        Task t = applicationRunner.RunAsync();
+        Task.Run(() => {
+          while (applicationRunner.Status != RunnerStatus.Stopped) {
+            string s = applicationRunner.ReadFromApplicationConsole();
+            Console.WriteLine(s);
+          }
+        });
+        Task.Run(() => {
+          while (applicationRunner.Status != RunnerStatus.Stopped) {
+            string s = Console.ReadLine();
+            applicationRunner.WriteToApplicationConsole(s);
+          }
+        });
+        t.Wait();
+      }
       Console.WriteLine();
     }
 
