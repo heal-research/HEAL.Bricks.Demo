@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.Bricks" Version="0.1.0-alpha.32" />
+    <PackageReference Include="HEAL.Bricks" Version="0.1.0-alpha.33" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,8 +15,12 @@ using System.Threading.Tasks;
 namespace HEAL.StringFormatter {
   class Program {
     private static IPluginManager pluginManager;
-    private static ITypeDiscoverer typeDiscoverer;
-    static async Task Main() {
+    static async Task Main(string[] args) {
+      if ((args.Length == 1) && (args[0] == "--StartRunner")) {
+        Runner.ReceiveAndExecuteRunner(Console.OpenStandardInput());
+        return;
+      }
+
       Console.WriteLine("HEAL.Bricks.Demo");
       Console.WriteLine("================");
       Console.WriteLine();
@@ -29,7 +33,6 @@ namespace HEAL.StringFormatter {
       Directory.CreateDirectory(settings.PackagesCachePath);
       pluginManager = PluginManager.Create(settings);
       pluginManager.Initialize();
-      typeDiscoverer = TypeDiscoverer.Create();
       Console.WriteLine("done");
       Console.WriteLine();
 
