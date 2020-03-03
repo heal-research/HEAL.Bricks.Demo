@@ -16,8 +16,8 @@ namespace HEAL.StringFormatter {
   class Program {
     private static IPluginManager pluginManager;
     static async Task Main(string[] args) {
-      if ((args.Length == 1) && (args[0] == "--StartRunner")) {
-        Runner.ReceiveAndExecuteRunner(Console.OpenStandardInput());
+      if ((args.Length == 1) && (args[0] == Runner.StartRunnerArgument)) {
+        await Runner.ReceiveAndExecuteRunnerAsync(Console.OpenStandardInput());
         return;
       }
 
@@ -69,7 +69,7 @@ namespace HEAL.StringFormatter {
           case 7: await InstallMissingDependencies(); break;
           case 8: await InstallUpdatesAsync(); break;
           case 9: LoadPlugins(); break;
-          case 10: StartApplication(); break;
+          case 10: await StartApplicationAsync(); break;
         };
       }
     }
@@ -185,12 +185,11 @@ namespace HEAL.StringFormatter {
       Console.WriteLine("done");
       Console.WriteLine();
     }
-    private static void StartApplication() {
+    private static async Task StartApplicationAsync() {
       Console.WriteLine("Applications:");
 
       DiscoverApplicationsRunner discoverApplicationsRunner = new DiscoverApplicationsRunner(pluginManager.Settings);
-      discoverApplicationsRunner.Run();
-      ApplicationInfo[] applications = discoverApplicationsRunner.ReceiveMessage<DiscoveredApplicationsMessage>().Data;
+      ApplicationInfo[] applications = await discoverApplicationsRunner.GetApplicationsAsync();
       for (int i = 0; i < applications.Length; i++) {
         Console.WriteLine($"[{i + 1}] {applications[i].Name}");
       }
@@ -200,21 +199,8 @@ namespace HEAL.StringFormatter {
       Console.WriteLine();
       if (applicationIndex == 0) return;
       else {
-        ApplicationRunner applicationRunner = new ApplicationRunner(pluginManager.Settings, applications[applicationIndex - 1]);
-        Task t = applicationRunner.RunAsync();
-        Task.Run(() => {
-          while (applicationRunner.Status != RunnerStatus.Stopped) {
-            string s = applicationRunner.ReadFromApplicationConsole();
-            Console.WriteLine(s);
-          }
-        });
-        Task.Run(() => {
-          while (applicationRunner.Status != RunnerStatus.Stopped) {
-            string s = Console.ReadLine();
-            applicationRunner.WriteToApplicationConsole(s);
-          }
-        });
-        t.Wait();
+        ConsoleApplicationRunner applicationRunner = new ConsoleApplicationRunner(pluginManager.Settings, applications[applicationIndex - 1]);
+        await applicationRunner.RunAsync();
       }
       Console.WriteLine();
     }

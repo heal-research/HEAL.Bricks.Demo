@@ -12,11 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.StringFormatter.Interfaces" Version="0.1.0-alpha.1" />
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+    <ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

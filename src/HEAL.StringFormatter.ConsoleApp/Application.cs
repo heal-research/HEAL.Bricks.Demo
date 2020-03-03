@@ -8,25 +8,19 @@
 using HEAL.Bricks;
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HEAL.StringFormatter.ConsoleApp {
   class Application : IApplication {
     public string Name => "HEAL.StringFormatter.ConsoleApp";
-
     public string Description => "Console application of the HEAL String Formatter.";
 
-    public void OnCancel() {
-      throw new NotImplementedException();
+    public async Task RunAsync(ICommandLineArgument[] args, CancellationToken cancellationToken = default) {
+      await Task.Run(() => {
+        Run(args);
+      }, cancellationToken);
     }
-
-    public void OnPause() {
-      throw new NotImplementedException();
-    }
-
-    public void OnResume() {
-      throw new NotImplementedException();
-    }
-
     public void Run(ICommandLineArgument[] args) {
       ITypeDiscoverer typeDiscoverer = TypeDiscoverer.Create();
       IStringFormatter[] formatters = typeDiscoverer.GetInstances<IStringFormatter>().OrderBy(x => x.GetType().Name).ToArray();
@@ -62,6 +56,16 @@ namespace HEAL.StringFormatter.ConsoleApp {
         }
         return formatters[index - 1];
       }
+    }
+
+    public void OnCancel() {
+      throw new NotImplementedException();
+    }
+    public void OnPause() {
+      throw new NotImplementedException();
+    }
+    public void OnResume() {
+      throw new NotImplementedException();
     }
   }
 }

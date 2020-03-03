@@ -12,12 +12,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.Bricks.PluginTypes" Version="0.1.0-alpha.29" />
-    <PackageReference Include="HEAL.StringFormatter.Interfaces" Version="0.1.0-alpha.1" />
+    <PackageReference Include="HEAL.Bricks.PluginTypes" Version="0.1.0-alpha.36" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
