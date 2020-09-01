@@ -15,6 +15,7 @@ namespace HEAL.StringFormatter.ConsoleApp {
   class Application : IApplication {
     public string Name => "HEAL.StringFormatter.ConsoleApp";
     public string Description => "Console application of the HEAL String Formatter.";
+    public ApplicationKind Kind => ApplicationKind.Console;
 
     public async Task RunAsync(ICommandLineArgument[] args, CancellationToken cancellationToken = default) {
       await Task.Run(() => {
