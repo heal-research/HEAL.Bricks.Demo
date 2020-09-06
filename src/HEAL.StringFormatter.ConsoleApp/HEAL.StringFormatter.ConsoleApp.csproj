@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.Bricks.PluginTypes" Version="0.2.20-alpha-ge37256e002" />
+    <PackageReference Include="HEAL.Bricks.PluginTypes" Version="0.2.26-alpha-g7a8541c02a" />
   </ItemGroup>
 
   <ItemGroup>

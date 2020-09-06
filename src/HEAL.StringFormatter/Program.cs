@@ -10,15 +10,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HEAL.StringFormatter {
   class Program {
     private static IPackageManager packageManager;
     static async Task Main(string[] args) {
-      if (Runner.ParseArguments(args, out CommunicationMode communicationMode, out string inputConnection, out string outputConnection)) {
-        await Runner.ReceiveAndExecuteRunnerAsync(communicationMode, inputConnection, outputConnection);
-        return;
+      using (IChannel channel = ProcessChannel.CreateFromCLIArguments(args)) {
+        if (channel != null) {
+          await Runner.ReceiveAndExecuteAsync(channel);
+          return;
+        }
       }
 
       Console.WriteLine("HEAL.Bricks.Demo");
@@ -187,8 +190,11 @@ namespace HEAL.StringFormatter {
     private static async Task StartApplicationAsync() {
       Console.WriteLine("Applications:");
 
-      DiscoverApplicationsRunner discoverApplicationsRunner = new DiscoverApplicationsRunner(packageManager.GetPackageLoadInfos());
-      ApplicationInfo[] applications = await discoverApplicationsRunner.GetApplicationsAsync();
+      ApplicationInfo[] applications;
+      using (IChannel channel = new AnonymousPipesProcessChannel("dotnet", "\"" + Assembly.GetEntryAssembly().Location + "\"")) {
+        DiscoverApplicationsRunner discoverApplicationsRunner = new DiscoverApplicationsRunner(packageManager.GetPackageLoadInfos());
+        applications = await discoverApplicationsRunner.GetApplicationsAsync(channel);
+      }
       for (int i = 0; i < applications.Length; i++) {
         Console.WriteLine($"[{i + 1}] {applications[i].Name}");
       }
@@ -198,8 +204,10 @@ namespace HEAL.StringFormatter {
       Console.WriteLine();
       if (applicationIndex == 0) return;
       else {
-        ApplicationRunner applicationRunner = new ApplicationRunner(packageManager.GetPackageLoadInfos(), applications[applicationIndex - 1]);
-        await applicationRunner.RunAsync();
+        using (IChannel channel = new StdInOutProcessChannel("dotnet", "\"" + Assembly.GetEntryAssembly().Location + "\"")) {
+          ApplicationRunner applicationRunner = new ApplicationRunner(packageManager.GetPackageLoadInfos(), applications[applicationIndex - 1]);
+          await applicationRunner.RunAsync(channel);
+        }
       }
       Console.WriteLine();
     }
