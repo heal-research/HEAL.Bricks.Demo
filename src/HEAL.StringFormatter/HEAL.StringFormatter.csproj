@@ -4,14 +4,14 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>HEAL.StringFormatter</RootNamespace>
-    <Version>0.1.0-alpha.1</Version>
+    <Version>0.2.0-alpha.1</Version>
     <Authors>SWa</Authors>
     <Company>HEAL</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.Bricks" Version="0.2.26-alpha-g7a8541c02a" />
+    <PackageReference Include="HEAL.Bricks" Version="0.2.38-alpha" />
   </ItemGroup>
 
   <ItemGroup>
