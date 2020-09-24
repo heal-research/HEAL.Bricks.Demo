@@ -134,7 +134,7 @@ namespace HEAL.StringFormatter {
     }
     private static async Task InstallPackageAsync() {
       string packageId = ReadString("Package", "HEAL.StringFormatter.ConsoleApp");
-      string version = ReadString("Version", "0.2.0-alpha.1");
+      string version = ReadString("Version", "0.3.0-alpha.1");
       bool installMissingDependencies = ReadYesNo("Install missing dependencies?", true);
       RemotePackageInfo package = await applicationManager.PackageManager.GetRemotePackageAsync(packageId, version);
       if (package == null) {

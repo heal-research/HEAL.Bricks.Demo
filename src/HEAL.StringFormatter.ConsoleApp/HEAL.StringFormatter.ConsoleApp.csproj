@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.0-alpha.1</Version>
+    <Version>0.3.0-alpha.1</Version>
     <Authors>SWa</Authors>
     <Company>HEAL</Company>
     <Product>HEAL.StringFormatter</Product>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HEAL.Bricks.PluginTypes" Version="0.2.38-alpha" />
+    <PackageReference Include="HEAL.Bricks.Core" Version="0.3.6-alpha" />
   </ItemGroup>
 
   <ItemGroup>
