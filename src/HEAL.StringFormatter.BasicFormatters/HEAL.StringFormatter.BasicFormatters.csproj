@@ -1,22 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.0-alpha.1</Version>
-    <Authors>SWa</Authors>
-    <Company>HEAL</Company>
-    <Product>HEAL.StringFormatter</Product>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HEALStringFormatterPlugin</PackageTags>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.3.0-alpha.1</Version>
+		<Authors>SWa</Authors>
+		<Company>HEAL</Company>
+		<Product>HEAL.StringFormatter</Product>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>HEALStringFormatterPlugin</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
+	</ItemGroup>
 
 </Project>

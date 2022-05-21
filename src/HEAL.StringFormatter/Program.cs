@@ -6,21 +6,16 @@
 #endregion
 
 using HEAL.Bricks;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HEAL.StringFormatter {
   class Program {
     private static IApplicationManager applicationManager;
-    private static Settings settings;
+    private static readonly BricksOptions options = BricksOptions.Default;
 
     static async Task Main(string[] args) {
-      using (IChannel channel = ProcessChannel.CreateFromCLIArguments(args)) {
+      using (IChannel? channel = ProcessChannel.CreateFromCLIArguments(args)) {
         if (channel != null) {
-          await Runner.ReceiveAndExecuteAsync(channel);
+          await MessageHandler.Factory.ClientMessageHandler().ReceiveMessagesAsync(channel);
           return;
         }
       }
@@ -30,13 +25,11 @@ namespace HEAL.StringFormatter {
       Console.WriteLine();
 
       Console.Write("Initializing Application Manager ... ");
-      settings = new Settings {
-        Isolation = Isolation.AnonymousPipes
-      };
-      settings.Repositories.Add(@"C:\# Daten\NuGet");
-      Directory.CreateDirectory(settings.PackagesPath);
-      Directory.CreateDirectory(settings.PackagesCachePath);
-      applicationManager = ApplicationManager.Create(settings);
+      options.DefaultIsolation = Isolation.AnonymousPipes;
+      options.Repositories.Add(new Repository(@"C:\00-Data\NuGet"));
+      Directory.CreateDirectory(options.PackagesPath);
+      Directory.CreateDirectory(options.PackagesCachePath);
+      applicationManager = ApplicationManager.Create(options);
       Console.WriteLine("done");
       Console.WriteLine();
 
@@ -58,7 +51,7 @@ namespace HEAL.StringFormatter {
         Console.WriteLine("[ 8] Install updates");
         Console.WriteLine("[ 9] Load packages");
         Console.WriteLine("[10] Change isolation mode");
-        Console.WriteLine("[11] Start application");
+        Console.WriteLine("[11] Start runnable");
         Console.WriteLine("[ 0] Exit");
 
         int actionIndex = ReadActionIndex("Action", 0, 11);
@@ -75,31 +68,30 @@ namespace HEAL.StringFormatter {
           case 8: await InstallUpdatesAsync(); break;
           case 9: LoadPackages(); break;
           case 10: await ChangeIsolationModeAsync(); break;
-          case 11: await StartApplicationAsync(); break;
+          case 11: await StartRunnableAsync(); break;
         };
       }
     }
 
     private static void ShowPackageManagerStatus() {
       Console.WriteLine("Package Manager Status:");
-      Console.WriteLine($".NET Framework:     {applicationManager.PackageManager.Settings.CurrentRuntimeIsNETFramework}");
       Console.WriteLine($"Packages:           {applicationManager.PackageManager.InstalledPackages.Count()}");
       Console.WriteLine($"Status:             {applicationManager.PackageManager.Status}");
-      Console.WriteLine($"Repositories:       {string.Join(", ", applicationManager.PackageManager.Settings.Repositories)}");
-      Console.WriteLine($"App path:           {applicationManager.PackageManager.Settings.AppPath}");
-      Console.WriteLine($"Packages path:      {applicationManager.PackageManager.Settings.PackagesPath}");
-      Console.WriteLine($"Cache path:         {applicationManager.PackageManager.Settings.PackagesCachePath}");
-      Console.WriteLine($"Isolation:          {applicationManager.PackageManager.Settings.Isolation}");
-      Console.WriteLine($"Starter Assembly:   {applicationManager.PackageManager.Settings.StarterAssembly}");
-      Console.WriteLine($"Dotnet command:     {applicationManager.PackageManager.Settings.DotnetCommand}");
-      Console.WriteLine($"Docker command:     {applicationManager.PackageManager.Settings.DockerCommand}");
-      Console.WriteLine($"Docker image:       {applicationManager.PackageManager.Settings.DockerImage}");
-      Console.WriteLine($"Windows Containers: {applicationManager.PackageManager.Settings.UseWindowsContainer}");
+      Console.WriteLine($"Repositories:       {string.Join(", ", applicationManager.PackageManager.Options.Repositories.Select(x => x.Source))}");
+      Console.WriteLine($"App path:           {applicationManager.PackageManager.Options.AppPath}");
+      Console.WriteLine($"Packages path:      {applicationManager.PackageManager.Options.PackagesPath}");
+      Console.WriteLine($"Cache path:         {applicationManager.PackageManager.Options.PackagesCachePath}");
+      Console.WriteLine($"Isolation:          {applicationManager.PackageManager.Options.DefaultIsolation}");
+      Console.WriteLine($"Starter Assembly:   {applicationManager.PackageManager.Options.StarterAssembly}");
+      Console.WriteLine($"Dotnet command:     {applicationManager.PackageManager.Options.DotnetCommand}");
+      Console.WriteLine($"Docker command:     {applicationManager.PackageManager.Options.DockerCommand}");
+      Console.WriteLine($"Docker image:       {applicationManager.PackageManager.Options.DefaultDockerImage}");
+      Console.WriteLine($"Windows Containers: {applicationManager.PackageManager.Options.UseWindowsContainer}");
       Console.WriteLine();
     }
     private static void ListInstalledPackages() {
       Console.WriteLine("Installed Packages:");
-      if (applicationManager.PackageManager.InstalledPackages.Count() == 0) {
+      if (!applicationManager.PackageManager.InstalledPackages.Any()) {
         Console.WriteLine("none");
       } else {
         foreach (LocalPackageInfo packageInfo in applicationManager.PackageManager.InstalledPackages) {
@@ -123,7 +115,7 @@ namespace HEAL.StringFormatter {
             Console.WriteLine($"  - {Package}");
           }
         }
-        if (packages.Count() == 0) {
+        if (!packages.Any()) {
           continueSearch = false;
         } else {
           continueSearch = ReadYesNo("Continue?", true);
@@ -136,7 +128,7 @@ namespace HEAL.StringFormatter {
       string packageId = ReadString("Package", "HEAL.StringFormatter.ConsoleApp");
       string version = ReadString("Version", "0.3.0-alpha.1");
       bool installMissingDependencies = ReadYesNo("Install missing dependencies?", true);
-      RemotePackageInfo package = await applicationManager.PackageManager.GetRemotePackageAsync(packageId, version);
+      RemotePackageInfo? package = await applicationManager.PackageManager.GetRemotePackageAsync(packageId, version);
       if (package == null) {
         Console.WriteLine("Error: Package not found.");
       } else {
@@ -168,7 +160,7 @@ namespace HEAL.StringFormatter {
       IEnumerable<RemotePackageInfo> missingDependencies = await applicationManager.PackageManager.GetMissingDependenciesAsync();
       Console.WriteLine("done");
 
-      if (missingDependencies.Count() == 0) {
+      if (!missingDependencies.Any()) {
         Console.WriteLine("none");
       } else {
         foreach (RemotePackageInfo package in missingDependencies) {
@@ -193,11 +185,11 @@ namespace HEAL.StringFormatter {
     }
     private static void LoadPackages() {
       Console.Write("Loading assemblies ... ");
-      PackageLoader.Instance.LoadPackageAssemblies(applicationManager.PackageManager.GetPackageLoadInfos());
+      PackageLoader.LoadPackageAssemblies(applicationManager.PackageManager.GetPackageLoadInfos());
       Console.WriteLine("done");
       Console.WriteLine();
     }
-    private static async Task ChangeIsolationModeAsync() {
+    private static Task ChangeIsolationModeAsync() {
       Console.WriteLine("Isolation Modes:");
       string[] isolationModes = Enum.GetNames(typeof(Isolation));
       for (int i = 0; i < isolationModes.Length; i++) {
@@ -209,29 +201,30 @@ namespace HEAL.StringFormatter {
       int actionIndex = ReadActionIndex("Isolation mode", 0, isolationModes.Length);
       if (actionIndex != 0) {
         Console.Write("Setting isolation mode ... ");
-        settings.Isolation = Enum.Parse<Isolation>(isolationModes[actionIndex - 1]);
-        applicationManager = ApplicationManager.Create(settings);
+        options.DefaultIsolation = Enum.Parse<Isolation>(isolationModes[actionIndex - 1]);
+        applicationManager = ApplicationManager.Create(options);
         Console.WriteLine("done");
       }
       Console.WriteLine();
+      return Task.CompletedTask;
     }
 
-    private static async Task StartApplicationAsync() {
-      Console.WriteLine("Applications:");
+    private static async Task StartRunnableAsync() {
+      Console.WriteLine("Runnables:");
 
-      applicationManager = ApplicationManager.Create(settings);
+      applicationManager = ApplicationManager.Create(options);
       int i = 1;
-      foreach (ApplicationInfo application in applicationManager.InstalledApplications) {
-        Console.WriteLine($"[{i}] {application.Name}");
+      foreach (RunnableInfo runnable in applicationManager.InstalledRunnables) {
+        Console.WriteLine($"[{i}] {runnable.Name}");
         i++;
       }
       Console.WriteLine("[0] Back");
 
-      int applicationIndex = ReadActionIndex("Application", 0, applicationManager.InstalledApplications.Count());
+      int runnableIndex = ReadActionIndex("Runnable", 0, applicationManager.InstalledRunnables.Count());
       Console.WriteLine();
-      if (applicationIndex == 0) return;
+      if (runnableIndex == 0) return;
       else {
-        await applicationManager.RunAsync(applicationManager.InstalledApplications.ElementAt(applicationIndex - 1));
+        await applicationManager.RunAsync(applicationManager.InstalledRunnables.ElementAt(runnableIndex - 1));
       }
       Console.WriteLine();
     }
@@ -253,13 +246,13 @@ namespace HEAL.StringFormatter {
     }
     private static string ReadString(string prompt, string defaultValue = "") {
       Console.Write($"{prompt} {(string.IsNullOrWhiteSpace(defaultValue) ? "" : "[" + defaultValue + "]")} > ");
-      string input = Console.ReadLine();
+      string input = Console.ReadLine() ?? string.Empty;
       if (string.IsNullOrWhiteSpace(input)) return defaultValue;
       return input;
     }
     private static bool ReadYesNo(string prompt, bool defaultValue) {
       Console.Write($"{prompt} [{(defaultValue ? "Y/n" : "y/N")}] > ");
-      string input = Console.ReadLine();
+      string input = Console.ReadLine() ?? string.Empty;
       if ((input == "y") || (input == "Y")) return true;
       if ((input == "n") || (input == "N")) return false;
       return defaultValue;

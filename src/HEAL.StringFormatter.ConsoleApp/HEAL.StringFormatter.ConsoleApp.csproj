@@ -1,26 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.0-alpha.1</Version>
-    <Authors>SWa</Authors>
-    <Company>HEAL</Company>
-    <Product>HEAL.StringFormatter</Product>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HEALStringFormatterPlugin</PackageTags>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.3.0-alpha.1</Version>
+		<Authors>SWa</Authors>
+		<Company>HEAL</Company>
+		<Product>HEAL.StringFormatter</Product>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>HEALStringFormatterPlugin</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HEAL.Bricks.Core" Version="0.3.6-alpha" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="HEAL.Bricks.Abstractions" Version="0.3.21-alpha-g7a4ff3ec3e" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
+	</ItemGroup>
 
 </Project>
