@@ -7,7 +7,7 @@
 
 using HEAL.Bricks;
 
-namespace HEAL.StringFormatter {
+namespace HEAL.Bricks.Demo.ConsoleHost {
   class Program {
     private static IApplicationManager applicationManager;
     private static readonly BricksOptions options = BricksOptions.Default;

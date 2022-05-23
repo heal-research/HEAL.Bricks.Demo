@@ -11,13 +11,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HEAL.StringFormatter.ConsoleApp {
+namespace HEAL.Bricks.Demo.StringFormatter.ConsoleApp {
   class App : Application {
     public override string Name => "HEAL.StringFormatter.ConsoleApp";
     public override string Description => "Console application of the HEAL String Formatter.";
     public override ApplicationKind Kind => ApplicationKind.Console;
 
-    public override async Task StartAsync(string[] args, CancellationToken cancellationToken = default) {
+    public override async Task RunAsync(string[] args, CancellationToken cancellationToken = default) {
       await Task.Run(() => {
         Run();
       }, cancellationToken);

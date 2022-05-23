@@ -5,15 +5,15 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>HEAL.StringFormatter</RootNamespace>
-		<Version>0.3.0-alpha.1</Version>
+		<RootNamespace>HEAL.Bricks.Demo.ConsoleHost</RootNamespace>
+		<Version>0.4.0-alpha.1</Version>
 		<Authors>SWa</Authors>
 		<Company>HEAL</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HEAL.Bricks" Version="0.3.21-alpha-g7a4ff3ec3e" />
+		<PackageReference Include="HEAL.Bricks" Version="0.4.1-alpha-g35748619f1" />
 	</ItemGroup>
 
 	<ItemGroup>

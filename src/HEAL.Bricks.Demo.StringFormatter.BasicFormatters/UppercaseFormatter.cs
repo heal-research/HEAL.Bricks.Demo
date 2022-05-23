@@ -7,8 +7,10 @@
 
 using System;
 
-namespace HEAL.StringFormatter {
-  public interface IStringFormatter {
-    string Format(string input);
+namespace HEAL.Bricks.Demo.StringFormatter.BasicFormatters {
+  public class UppercaseFormatter : IStringFormatter {
+    public string Format(string input) {
+      return input.ToUpper();
+    }
   }
 }

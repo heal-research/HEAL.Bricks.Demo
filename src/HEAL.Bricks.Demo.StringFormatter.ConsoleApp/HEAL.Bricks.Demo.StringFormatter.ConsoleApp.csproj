@@ -4,13 +4,14 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<RootNamespace>HEAL.Bricks.Demo.StringFormatter</RootNamespace>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.3.0-alpha.1</Version>
+		<Version>0.4.0-alpha.1</Version>
 		<Authors>SWa</Authors>
 		<Company>HEAL</Company>
-		<Product>HEAL.StringFormatter</Product>
+		<Product>HEAL.Bricks.Demo.StringFormatter</Product>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageTags>HEALStringFormatterPlugin</PackageTags>
+		<PackageTags>HEALBricksDemoStringFormatterPlugin</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,11 +19,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HEAL.Bricks.Abstractions" Version="0.3.21-alpha-g7a4ff3ec3e" />
+		<PackageReference Include="HEAL.Bricks.Abstractions" Version="0.4.1-alpha-g35748619f1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\HEAL.StringFormatter.Interfaces\HEAL.StringFormatter.Interfaces.csproj" />
+		<ProjectReference Include="..\HEAL.Bricks.Demo.StringFormatter.Abstractions\HEAL.Bricks.Demo.StringFormatter.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>
