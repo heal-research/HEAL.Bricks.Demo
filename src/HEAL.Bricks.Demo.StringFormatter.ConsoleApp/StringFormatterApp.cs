@@ -12,10 +12,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace HEAL.Bricks.Demo.StringFormatter.ConsoleApp {
-  class App : Application {
+  class StringFormatterApp : Application {
     public override string Name => "HEAL.Bricks.Demo.StringFormatter";
     public override string Description => "Console application of the HEAL Bricks Demo String Formatter.";
     public override ApplicationKind Kind => ApplicationKind.Console;
+
+    public StringFormatterApp() : base() { }
+    public StringFormatterApp(IChannel channel) : base(channel) { }
 
     public override async Task RunAsync(string[] args, CancellationToken cancellationToken = default) {
       await Task.Run(() => {

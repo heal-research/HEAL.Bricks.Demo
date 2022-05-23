@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>HEAL.Bricks.Demo.StringFormatter</RootNamespace>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.4.0-alpha.1</Version>
+		<Version>0.4.1-alpha.1</Version>
 		<Authors>SWa</Authors>
 		<Company>HEAL</Company>
 		<Product>HEAL.Bricks.Demo.StringFormatter</Product>

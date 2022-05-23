@@ -26,7 +26,7 @@ namespace HEAL.Bricks.Demo.ConsoleHost {
 
       Console.Write("Initializing Application Manager ... ");
       options.DefaultIsolation = Isolation.AnonymousPipes;
-      options.Repositories.Add(new Repository(@"C:\00-Data\NuGet"));
+      //options.Repositories.Add(new Repository(@"C:\00-Data\NuGet"));
       Directory.CreateDirectory(options.PackagesPath);
       Directory.CreateDirectory(options.PackagesCachePath);
       applicationManager = ApplicationManager.Create(options);
@@ -125,8 +125,8 @@ namespace HEAL.Bricks.Demo.ConsoleHost {
       Console.WriteLine();
     }
     private static async Task InstallPackageAsync() {
-      string packageId = ReadString("Package", "HEAL.StringFormatter.ConsoleApp");
-      string version = ReadString("Version", "0.3.0-alpha.1");
+      string packageId = ReadString("Package", "HEAL.Bricks.Demo.StringFormatter.ConsoleApp");
+      string version = ReadString("Version", "0.4.1-alpha.1");
       bool installMissingDependencies = ReadYesNo("Install missing dependencies?", true);
       RemotePackageInfo? package = await applicationManager.PackageManager.GetRemotePackageAsync(packageId, version);
       if (package == null) {

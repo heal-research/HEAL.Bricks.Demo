@@ -10,7 +10,7 @@ using HEAL.Bricks.UI.WindowsForms;
 
 namespace HEAL.Bricks.Demo.WinFormsHost {
   class WinFormsApplication : WindowsFormsApplication {
-    public override string Name => "WinFormsApplication";
+    public override string Name => "HEAL.Bricks.Demo.WinFormsApplication";
     public override string Description => "Simple WinForms GUI application.";
 
     public WinFormsApplication() : base() { }
@@ -18,7 +18,7 @@ namespace HEAL.Bricks.Demo.WinFormsHost {
 
     public override Form CreateMainForm() {
       return new ApplicationForm {
-        Text = "WinFormsApplication"
+        Text = "HEAL.Bricks.Demo.WinFormsApplication"
       };
     }
   }
