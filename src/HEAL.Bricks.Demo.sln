@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4DC82340-24B8-4ABC-A985-F38676D2498C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE.txt = ..\LICENSE.txt
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HEAL.Bricks.Demo.ConsoleHost", "HEAL.Bricks.Demo.ConsoleHost\HEAL.Bricks.Demo.ConsoleHost.csproj", "{2E3EAD53-3314-44C2-A0A4-E99BC50715C8}"
 EndProject
@@ -12,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HEAL.Bricks.Demo.StringFormatter.BasicFormatters", "HEAL.Bricks.Demo.StringFormatter.BasicFormatters\HEAL.Bricks.Demo.StringFormatter.BasicFormatters.csproj", "{B2FB140A-BF78-4D83-B91B-93EEE2FCFDFC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HEAL.Bricks.Demo.StringFormatter.ConsoleApp", "HEAL.Bricks.Demo.StringFormatter.ConsoleApp\HEAL.Bricks.Demo.StringFormatter.ConsoleApp.csproj", "{0CE0E109-9DB9-459C-B8F1-5AFD3745FAF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HEAL.Bricks.Demo.WinFormsHost", "HEAL.Bricks.Demo.WinFormsHost\HEAL.Bricks.Demo.WinFormsHost.csproj", "{7E33F152-615C-4E56-8D30-5428B3779F55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +42,10 @@ Global
 		{0CE0E109-9DB9-459C-B8F1-5AFD3745FAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE0E109-9DB9-459C-B8F1-5AFD3745FAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE0E109-9DB9-459C-B8F1-5AFD3745FAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E33F152-615C-4E56-8D30-5428B3779F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E33F152-615C-4E56-8D30-5428B3779F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E33F152-615C-4E56-8D30-5428B3779F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E33F152-615C-4E56-8D30-5428B3779F55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

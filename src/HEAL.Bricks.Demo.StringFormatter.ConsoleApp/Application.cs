@@ -13,32 +13,29 @@ using System.Threading.Tasks;
 
 namespace HEAL.Bricks.Demo.StringFormatter.ConsoleApp {
   class App : Application {
-    public override string Name => "HEAL.StringFormatter.ConsoleApp";
-    public override string Description => "Console application of the HEAL String Formatter.";
+    public override string Name => "HEAL.Bricks.Demo.StringFormatter";
+    public override string Description => "Console application of the HEAL Bricks Demo String Formatter.";
     public override ApplicationKind Kind => ApplicationKind.Console;
 
     public override async Task RunAsync(string[] args, CancellationToken cancellationToken = default) {
       await Task.Run(() => {
-        Run();
-      }, cancellationToken);
-    }
-    public static void Run() {
-      ITypeDiscoverer typeDiscoverer = new TypeDiscoverer();
-      IStringFormatter[] formatters = typeDiscoverer.GetInstances<IStringFormatter>().OrderBy(x => x.GetType().Name).ToArray();
+        ITypeDiscoverer typeDiscoverer = new TypeDiscoverer();
+        IStringFormatter[] formatters = typeDiscoverer.GetInstances<IStringFormatter>().OrderBy(x => x.GetType().Name).ToArray();
 
-      string input = ReadString();
-      while (!string.IsNullOrEmpty(input)) {
-        IStringFormatter? formatter = ChooseFormatter(formatters);
-        Console.Write("output: ");
-        Console.WriteLine(formatter?.Format(input) ?? "--- none ---");
-        Console.WriteLine();
-        input = ReadString();
-      }
+        string input = ReadString();
+        while (!string.IsNullOrEmpty(input)) {
+          IStringFormatter? formatter = ChooseFormatter(formatters);
+          Console.Write("output: ");
+          Console.WriteLine(formatter?.Format(input) ?? "--- none ---");
+          Console.WriteLine();
+          input = ReadString();
+        }
+      }, cancellationToken);
     }
 
     private static string ReadString() {
       Console.Write("string > ");
-      return Console.ReadLine() ?? String.Empty;
+      return Console.ReadLine() ?? string.Empty;
     }
 
     private static IStringFormatter? ChooseFormatter(IStringFormatter[] formatters) {
@@ -57,16 +54,6 @@ namespace HEAL.Bricks.Demo.StringFormatter.ConsoleApp {
         }
         return formatters[index - 1];
       }
-    }
-
-    public void OnCancel() {
-      throw new NotImplementedException();
-    }
-    public void OnPause() {
-      throw new NotImplementedException();
-    }
-    public void OnResume() {
-      throw new NotImplementedException();
     }
   }
 }

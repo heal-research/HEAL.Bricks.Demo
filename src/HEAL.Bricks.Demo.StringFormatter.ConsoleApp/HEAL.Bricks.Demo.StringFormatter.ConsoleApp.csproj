@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HEAL.Bricks.Abstractions" Version="0.4.1-alpha-g35748619f1" />
+		<PackageReference Include="HEAL.Bricks.Abstractions" Version="0.4.2-alpha-gccd57e3576" />
 	</ItemGroup>
 
 	<ItemGroup>

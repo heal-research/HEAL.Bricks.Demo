@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>HEAL.Bricks.Demo.ConsoleHost</RootNamespace>
+		<UseWindowsForms>true</UseWindowsForms>
 		<Version>0.4.0-alpha.1</Version>
 		<Authors>SWa</Authors>
 		<Company>HEAL</Company>
@@ -13,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HEAL.Bricks" Version="0.4.2-alpha-gccd57e3576" />
+		<PackageReference Include="HEAL.Bricks.UI.WindowsForms" Version="0.4.2-alpha-gccd57e3576" />
 	</ItemGroup>
 
 	<ItemGroup>
